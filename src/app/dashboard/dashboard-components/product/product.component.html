@@ -1,0 +1,54 @@
+<!-- Daily Activity -->
+<mat-card class="w-100">
+  <mat-card-content>
+    <h4 class="mb-56">Daily Healthy Meals</h4>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="text-nowrap w-100">
+
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell class="fw-medium" *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Meal Column -->
+        <ng-container matColumnDef="meal">
+          <th mat-header-cell *matHeaderCellDef> Meal </th>
+          <td mat-cell *matCellDef="let element">
+            <p class="mb-0 fw-medium">{{ element.meal }}</p>
+          </td>
+        </ng-container>
+
+        <!-- Time Column -->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+        </ng-container>
+
+        <!-- Calories Column -->
+        <ng-container matColumnDef="calories">
+          <th mat-header-cell *matHeaderCellDef> Calories </th>
+          <td mat-cell *matCellDef="let element"> {{element.calories}} </td>
+        </ng-container>
+
+        <!-- Nutrients Column -->
+        <ng-container matColumnDef="nutrients">
+          <th mat-header-cell *matHeaderCellDef> Nutrients </th>
+          <td mat-cell *matCellDef="let element"> {{element.nutrients}} </td>
+        </ng-container>
+
+        <!-- Badge Column -->
+        <ng-container matColumnDef="badge">
+          <th mat-header-cell *matHeaderCellDef> Badge </th>
+          <td mat-cell *matCellDef="let element">
+            <span class="badge {{element.badge}} rounded-pill">{{element.badge}}</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedcolumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedcolumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
