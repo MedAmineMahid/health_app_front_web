@@ -1,0 +1,112 @@
+<div class="profile-container">
+
+
+  <div class="cover-image">
+    <button class="change-cover">Change Cover</button>
+  </div>
+
+  <div class="content">
+    <div class="sidebar">
+      <img src="assets/images/user2.webp" alt="Profile" class="profile-image">
+      <h2>Nathaniel Poole</h2>
+      <input type="text" name="bio" id="bio" placeholder="quote about what motivates you the most"/>
+    </div>
+
+    <div class="main-content">
+      <nav>
+        <a href="#" class="active">Account Settings</a>
+        <a href="#">Notifications</a>
+      </nav>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" formControlName="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" formControlName="lastName">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" formControlName="phone">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" formControlName="email">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" formControlName="city">
+              <option>Bridgeport</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="state">State/County</label>
+            <input type="text" id="state" formControlName="state">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="postcode">Postcode</label>
+            <select id="postcode" formControlName="postcode">
+              <option>31005</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" formControlName="country">
+              <option>United States</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Additional Inputs for Health Data -->
+        <h3>Health Data</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="height">Height (cm)</label>
+            <input type="number" id="height" formControlName="height">
+          </div>
+          <div class="form-group">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" formControlName="weight">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="calories">Daily Caloric Intake (kcal)</label>
+            <input type="number" id="calories" formControlName="calories">
+          </div>
+          <div class="form-group">
+            <label for="water">Water Intake (liters)</label>
+            <input type="number" id="water" step="0.1" formControlName="water">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="exercise">Exercise Routine</label>
+            <textarea id="exercise" formControlName="exercise" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="healthConditions">Pre-existing Health Conditions</label>
+            <textarea id="healthConditions" formControlName="healthConditions" rows="4"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="update-btn">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
