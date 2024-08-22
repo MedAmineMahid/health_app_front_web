@@ -1,0 +1,57 @@
+<div>
+  <h2 mat-dialog-title>
+    Add New Meal
+    <button (click)="addIngredient()" class="add-ingredient-btn">+ New Ingredient</button>
+    <h2>Total : {{totalcalories | number: '1.0-0' }}</h2>
+    <input type="text" [(ngModel)]="mealName" placeholder="name your meal">
+    <div class="meal-category">
+      <button *ngFor="let category of mealCategories"
+              [class.active]="selectedCategory === category"
+              (click)="selectCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+  </h2>
+  <mat-dialog-content>
+    <div class="meal-log-container">
+      <div class="food-entry-section">
+        <div *ngFor="let _ of [].constructor(newMeal.length); let i = index" class="row meal-row">
+          <div class="col-md-4 search-bar">
+            <input
+              class="search-input"
+              type="text"
+              [(ngModel)]="newMeal[i].name"
+              (input)="searchFood(newMeal[i].name)"
+              placeholder="Search for a food..."
+            />
+            <ul *ngIf="suggestions.length" class="suggestions-list">
+              <li *ngFor="let suggestion of suggestions | slice: 0: 5" (click)="selectSuggestion(suggestion, i)">
+                {{ suggestion.food_name }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 meal-details">
+            <div class="quantity-input">
+              <input class="quantity-input-box" type="number" [(ngModel)]="newMeal[i].quantity" placeholder="Amount" />
+              <select class="unit-select" [(ngModel)]="newMeal[i].measure">
+                <option value="g">grams</option>
+                <option value="tbsp">tbsp</option>
+                <option value="pcs">pieces</option>
+                <option value="cup">cup</option>
+              </select>
+            </div>
+          </div>
+          <p class=" col-md-2 calorie-display" ngDefaultControl>
+            {{newMeal[i].calories}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close class="cancel-btn">Cancel</button>
+    <button (click)="calculatecalories()"  class="calculate-btn">Calculate Calories</button>
+    <button (click)="save()" mat-button mat-dialog-close class="calculate-btn">Save</button>
+
+  </mat-dialog-actions>
+</div>

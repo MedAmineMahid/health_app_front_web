@@ -1,13 +1,23 @@
 <!-- Daily Activity -->
 <mat-card>
   <mat-card-content>
+
+    <button type="button" class="btn btn-outline-success">
+      <i class="bi bi-pencil-square"></i>Edit
+    </button>
+
+    <button type="button" class="btn btn-outline-warning" (click)="openDialog()">
+      <i class="bi bi-plus-square"></i> New Meal
+    </button>
     <h4 class="mb-60">Daily Meals</h4>
     <div class="d-flex" *ngFor="let activity of activity">
       <p class="fw-bold ps-16 pe-20 fs-12">{{ activity.time }}</p>
       <div class="activity-border">
         <div class="deep">
           <div class="activity-ring">
-            <div class="ring {{ activity.ringColor }}"></div>
+            <div class="ring {{ activity.ringColor }}">
+              <!-- <i class="bi bi-pencil-square"></i>edit-->
+            </div>
           </div>
         </div>
         <p class="ps-20 pe-16 activity-message">{{ activity.message }}</p>
@@ -15,3 +25,4 @@
     </div>
   </mat-card-content>
 </mat-card>
+

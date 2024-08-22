@@ -15,14 +15,17 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import {HomeComponent} from "./home/home.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
+    HomeComponent,
     AppComponent,
     FullComponent,
     ProfileComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +35,13 @@ import { SigninComponent } from './auth/signin/signin.component';
     DemoFlexyModule,
     DashboardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule // Add this
+
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

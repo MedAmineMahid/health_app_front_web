@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import {MealLogComponent} from "../../../meal-log/meal-log.component";
 
 interface activity {
   time: string;
@@ -12,7 +14,7 @@ interface activity {
 })
 export class ActivityComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -44,5 +46,18 @@ export class ActivityComponent implements OnInit {
       message: "Dinner: Baked salmon with quinoa and steamed broccoli",
     },
   ];
+  newMeal: any;
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MealLogComponent, {
+      width: '700px' // You can adjust the width as necessary
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // You can handle any actions after the dialog is closed if needed
+    });
+  }
+
 
 }
