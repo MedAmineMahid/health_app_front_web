@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {UserModel} from "../../models/UserModel";
+import {AuthService} from "../../Services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -6,37 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
+  user = new UserModel();
+  error:number = 0;
   url="home"
-constructor() {}
+constructor(private router: Router,private authService : AuthService) {}
 
-  ngOnInit(): void {
-    const sign_in_btn = document.querySelector("#sign-in-btn") as HTMLElement;
-    const sign_up_btn = document.querySelector("#sign-up-btn") as HTMLElement;
-    const container = document.querySelector(".container") as HTMLElement;
-
-    sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
-      this.animateBackground();
-    });
-
-    sign_in_btn.addEventListener("click", () => {
-      container.classList.remove("sign-up-mode");
-    });
-  }
-
-  animateBackground() {
-    const container = document.querySelector(".container") as HTMLElement;
-    const circles = 5;
-
-    for (let i = 0; i < circles; i++) {
-      const circle = document.createElement('div');
-      circle.classList.add('animated-circle');
-      circle.style.setProperty('--delay', `${i * 0.2}s`);
-      container.appendChild(circle);
-
-      setTimeout(() => {
-        circle.remove();
-      }, 2000);
-    }
+  logIn() {
+    console.log("pooooooooooo\n");
+    console.log(`username : ${this.user.username} |  password : ${this.user.password}`);
+    this.authService.login(this.user).subscribe(
+      {
+        next: (data)=>{
+          let jwtToken = data.headers.get("Authorization")!;
+          this.authService.saveToken(jwtToken);
+          this.router.navigate(['/home']);
+        },
+        error:(error : any) => {
+          this.error=1;
+          console.log("error fatal !")
+        }
+      }
+    )
   }
 }

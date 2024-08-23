@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ApiResponse} from "./api-response";
 import {Meal} from "./meal";
+import {AuthService} from "./Services/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NutritionService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private authService: AuthService) { }
 
+  jwt = "Bearer "+this.authService.getToken();
+  httpHeaders = new HttpHeaders({"Authorization":this.jwt})
   /*
   getSuggestions(query: string): Observable<string[]> {
     return this.http.get<string[]>(`/api/suggestions?query=${query}`);
@@ -19,10 +22,10 @@ export class NutritionService {
 
   calculateCalories(food: string):Observable<any>{
     console.log("\n service food : "+food);
-    return this.http.get<any>(`http://localhost:8080/api/caloriesCaluculator/${food}`);
+    return this.http.get<any>(`http://localhost:8080/api/caloriesCaluculator/${food}`,{headers:this.httpHeaders});
   }
   suggestion(name:string):Observable<ApiResponse>{
-    return this.http.get<ApiResponse>(`http://localhost:8080/api/searchIngredient/${name}`)
+    return this.http.get<ApiResponse>(`http://localhost:8080/api/searchIngredient/${name}`,{headers:this.httpHeaders})
   }
   saveMeal(name:string,category:string,ingredients:Meal[]){
     //send request to backend
